@@ -6,6 +6,12 @@ See the file COPYING for copying permission.
 static char RCSId[]
   = "$Header$";
 
+#ifdef COMPILED_FROM_DSP
+#  include "winconfig.h"
+#  define XMLPARSEAPI __declspec(dllexport)
+#  include "expat.h"
+#  undef XMLPARSEAPI
+#else
 #include <config.h>
 
 #ifdef __declspec
@@ -17,6 +23,7 @@ static char RCSId[]
 #ifdef __declspec
 #  undef XMLPARSEAPI
 #endif
+#endif /* ndef COMPILED_FROM_DSP */
 
 #include <stddef.h>
 
@@ -511,6 +518,12 @@ typedef struct {
 #define parentParser (((Parser *)parser)->m_parentParser)
 #define paramEntityParsing (((Parser *)parser)->m_paramEntityParsing)
 #endif /* XML_DTD */
+
+#ifdef COMPILED_FROM_DSP
+BOOL WINAPI DllMain(HINSTANCE h, DWORD r, LPVOID p) {
+  return TRUE;
+}
+#endif /* def COMPILED_FROM_DSP */
 
 #ifdef _MSC_VER
 #ifdef _DEBUG
@@ -4554,7 +4567,8 @@ build_node (XML_Parser parser,
     dest->children = 0;
   }
   else {
-    int i, cn;
+    unsigned int i;
+    int cn;
     dest->numchildren = dtd.scaffold[src_node].childcnt;
     dest->children = *contpos;
     *contpos += dest->numchildren;
@@ -4570,7 +4584,6 @@ build_node (XML_Parser parser,
 static XML_Content *
 build_model (XML_Parser parser)
 {
-  int node;
   XML_Content *ret;
   XML_Content *cpos;
   char * str;

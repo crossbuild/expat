@@ -6,7 +6,12 @@ See the file COPYING for copying permission.
 static char RCSId[]
   = "$Header$";
 
-#include <config.h>
+#ifdef COMPILED_FROM_DSP
+#  include "winconfig.h"
+#else
+#  include <config.h>
+#endif /* ndef COMPILED_FROM_DSP */
+
 #include "xmlrole.h"
 #include "ascii.h"
 
