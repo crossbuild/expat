@@ -1325,25 +1325,16 @@ const XML_LChar *XML_ErrorString(int code)
 
 const XML_LChar *
 XML_ExpatVersion(void) {
-  static char *buff = NULL;
-
-  if (buff == NULL) {
-    buff = malloc(strlen(PACKAGE) + 3 + 10);
-    if (buff != NULL) {
-      sprintf(buff, "%s_%d.%d.%d", PACKAGE,
-              XML_MAJOR_VERSION, XML_MINOR_VERSION, XML_MICRO_VERSION);
-    }
-  }
-  return buff;
+  return VERSION;
 }
 
 XML_Expat_Version
 XML_ExpatVersionInfo(void) {
   XML_Expat_Version version;
 
-  version.major = XML_MAJOR_VERSION;
-  version.minor = XML_MINOR_VERSION;
-  version.micro = XML_MICRO_VERSION;
+  version.major = EXPAT_VMAJOR;
+  version.minor = EXPAT_VMINOR;
+  version.micro = EXPAT_VMICRO;
 
   return version;
 }
