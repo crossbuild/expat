@@ -608,7 +608,6 @@ XML_ParserCreate_MM(const XML_Char *encodingName,
   notStandaloneHandler = 0;
   externalEntityRefHandler = 0;
   externalEntityRefHandlerArg = parser;
-  internalEntityRefHandler = 0;
   unknownEncodingHandler = 0;
   elementDeclHandler = 0;
   attlistDeclHandler = 0;
