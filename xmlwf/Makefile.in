@@ -10,3 +10,6 @@ LIBS= -L$(LIBDIR) -lexpat
 
 xmlwf: $(OBJS)
 	$(CC) -o xmlwf $(LDFLAGS) $(OBJS) $(LIBS)
+
+clean:
+	rm -f xmlwf core *.o
