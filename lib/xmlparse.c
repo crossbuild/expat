@@ -999,7 +999,9 @@ void XML_SetStartNamespaceDeclHandler(XML_Parser parser,
 }
 
 void XML_SetEndNamespaceDeclHandler(XML_Parser parser,
-				    XML_EndNamespaceDeclHandler end);
+				    XML_EndNamespaceDeclHandler end) {
+  endNamespaceDeclHandler = end;
+}
 
 
 void XML_SetNotStandaloneHandler(XML_Parser parser,
