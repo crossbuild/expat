@@ -1324,8 +1324,28 @@ const XML_LChar *XML_ErrorString(int code)
 }
 
 const XML_LChar *
-XML_ExpatVersion() {
-  return VERSION;
+XML_ExpatVersion(void) {
+  static char *buff = NULL;
+
+  if (buff == NULL) {
+    buff = malloc(strlen(PACKAGE) + 3 + 10);
+    if (buff != NULL) {
+      sprintf(buff, "%s_%d.%d.%d", PACKAGE,
+              XML_MAJOR_VERSION, XML_MINOR_VERSION, XML_MICRO_VERSION);
+    }
+  }
+  return buff;
+}
+
+XML_Expat_Version
+XML_ExpatVersionInfo(void) {
+  XML_Expat_Version version;
+
+  version.major = XML_MAJOR_VERSION;
+  version.minor = XML_MINOR_VERSION;
+  version.micro = XML_MICRO_VERSION;
+
+  return version;
 }
 
 static
