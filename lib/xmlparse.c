@@ -3531,6 +3531,11 @@ enum XML_Error storeEntityValue(XML_Parser parser,
 	return XML_ERROR_NO_MEMORY;
       *(pool->ptr)++ = 0xA;
       break;
+    case XML_TOK_PERCENT:
+      if (pool->end == pool->ptr && !poolGrow(pool))
+	return XML_ERROR_NO_MEMORY;
+      *(pool->ptr)++ = '%';
+      break;
     case XML_TOK_CHAR_REF:
       {
 	XML_Char buf[XML_ENCODE_MAX];
