@@ -1332,9 +1332,9 @@ XML_Expat_Version
 XML_ExpatVersionInfo(void) {
   XML_Expat_Version version;
 
-  version.major = EXPAT_VMAJOR;
-  version.minor = EXPAT_VMINOR;
-  version.micro = EXPAT_VMICRO;
+  version.major = XML_MAJOR_VERSION;
+  version.minor = XML_MINOR_VERSION;
+  version.micro = XML_MICRO_VERSION;
 
   return version;
 }
